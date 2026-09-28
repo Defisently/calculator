@@ -5,7 +5,7 @@
 
 int input (int *number1, int *number2, char *operation) {
     printf("Input first number, then press enter: ");
-    if (scanf("%d", number1) == 0) {
+    if (scanf("%d\n", number1) == 0) {
         printf("You entered an invalid symbol. Please try again.");
         return INVALID_NUMBER_INPUT;
     }
@@ -25,7 +25,8 @@ int input (int *number1, int *number2, char *operation) {
 
 int output (int number1, int number2, char operation) {
     int res = 0;
-    if (calculate(operation, number1, number2, &res)) {
+    ERROR_CODES error;
+    if (calculate(operation, number1, number2, &res, &error)) {
         printf("Result: %d\n", res);
     } else {
         printf("Operation returned false. Please try again.\n");
