@@ -5,14 +5,15 @@
 
 
 
+// FIXME[dkay]: make enum constants' values different...
 typedef enum {
-    OK = 1,
-    DIVISION_BY_ZERO = 0,
-    INVALID_OPERATION_INPUT = 0,
-    INVALID_NUMBER_INPUT = 0,
-    SYSTEM_ERROR = 0,
-    NOT_EQUAL = 0,
-    INVALID_INPUT = 0,
+    OK                      = 0,
+    DIVISION_BY_ZERO        = 1,
+    INVALID_OPERATION_INPUT = 2,
+    INVALID_NUMBER_INPUT    = 3,
+    SYSTEM_ERROR            = 4,
+    NOT_EQUAL               = 5,
+    INVALID_INPUT           = 6,
 } ERROR_CODES;
 
 double sum(double number1, double number2);

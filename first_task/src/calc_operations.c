@@ -1,9 +1,11 @@
-#include "../input/calc_operations.h"
+#include "../input/calc_operations.h" // FIXME: relative input
 
 #include <stdbool.h>
 #include <stddef.h>
 
 double sum(double number1, double number2) {
+    // TODO: check isnan, isinf
+    // at least print at log
     return number1 + number2;
 }
 
@@ -12,6 +14,7 @@ double multiply(double number1, double number2) {
 }
 
 double divide(double number1, double number2) {
+    // FIXME: check zero division
     return number1 / number2;
 }
 
@@ -20,7 +23,10 @@ double subtract (double number1, double number2) {
 }
 
 bool calculate(char operation, double number1, double number2, double *out_result, ERROR_CODES *error) {
+    // check all pointers are not NULL
+
     *error = OK;
+
     if (out_result == NULL) {
         *error = SYSTEM_ERROR;
         return false;
@@ -38,7 +44,7 @@ bool calculate(char operation, double number1, double number2, double *out_resul
         return true;
 
     }
-    else if (operation == '/' && number2 == 0) {
+    else if (operation == '/' && number2 == 0) { // FIXME where is division!
         *error = DIVISION_BY_ZERO;
         return false;
     }
