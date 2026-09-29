@@ -6,23 +6,6 @@
 #include <math.h>
 
 
-bool check_equal(double num1, double num2) {
-    const double EPSILON = 1e-6;
-    if (num1 >= num2) {
-        if ((num1 - num2) < EPSILON) {
-            return OK;
-        } else {
-            return NOT_EQUAL;
-        }
-    } else {
-        if ((num2 - num1) < EPSILON) {
-            return OK;
-        } else {
-            return NOT_EQUAL;
-        }
-    }
-}
-
 bool read_and_check(char input[60]) {
     double num1 = 0.0, num2 = 0.0;
     double calc_res = 0.0, true_result = 0.0;

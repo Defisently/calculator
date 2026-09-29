@@ -3,6 +3,23 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+
+bool check_equal(double num1, double num2) {
+    const double EPSILON = 1e-6;
+    if (num1 >= num2) {
+        if ((num1 - num2) < EPSILON) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        if ((num2 - num1) < EPSILON) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
 double sum(double number1, double number2) {
     return number1 + number2;
 }
@@ -20,7 +37,6 @@ double subtract (double number1, double number2) {
 }
 
 bool calculate(char operation, double number1, double number2, double *out_result, ERROR_CODES *error) {
-    *error = OK;
     if (out_result == NULL) {
         *error = SYSTEM_ERROR;
         return false;
@@ -38,10 +54,9 @@ bool calculate(char operation, double number1, double number2, double *out_resul
         return true;
 
     }
-    else if (operation == '/' && number2 == 0) {
+    else if (operation == '/' && check_equal(0.0, number2)) {
         *error = DIVISION_BY_ZERO;
         return false;
     }
-    *error = SYSTEM_ERROR;
     return false;
 }
