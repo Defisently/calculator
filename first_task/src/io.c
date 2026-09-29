@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "calc_operations.h"
+#include "../input/calc_operations.h"
 
 double input (double *number1, double *number2, char *operation) {
     printf("Input first number, then press enter: ");

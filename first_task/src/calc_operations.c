@@ -1,4 +1,4 @@
-#include "calc_operations.h"
+#include "../input/calc_operations.h"
 
 #include <stdbool.h>
 #include <stddef.h>

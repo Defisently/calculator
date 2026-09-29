@@ -1,4 +1,4 @@
-#include "io.h"
+#include "../input/io.h"
 
 int main() {
     double number1 = 0, number2 = 0;

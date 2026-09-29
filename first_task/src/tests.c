@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
-#include "calc_operations.h"
+#include "../input/calc_operations.h"
 #include <math.h>
 
 
@@ -23,7 +23,7 @@ bool check_equal(double num1, double num2) {
     }
 }
 
-bool check(char input[60]) {
+bool read_and_check(char input[60]) {
     double num1 = 0.0, num2 = 0.0;
     double calc_res = 0.0, true_result = 0.0;
     double curr = 0.0;
@@ -116,7 +116,7 @@ int tests(void) {
     if (fp) {
         while (fgets(buffer, 60, fp) != NULL) {
             counter++;
-            if (check(buffer)) {
+            if (read_and_check(buffer)) {
                 counter_passed_tests++;
                 printf("%d %s", counter, "Test passed!\n");
             } else {
