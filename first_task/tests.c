@@ -125,6 +125,7 @@ int tests(void) {
             }
         }
     }
+    printf("~~~~~~~~~~~~~~~~~~~~~~~~\n");
     printf("%d tests passed\n", counter_passed_tests);
     printf("%d tests failed\n", counter_failed_tests);
     return 0;
