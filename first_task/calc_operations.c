@@ -3,23 +3,23 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-int sum(int number1, int number2) {
+double sum(double number1, double number2) {
     return number1 + number2;
 }
 
-int multiply(int number1, int number2) {
+double multiply(double number1, double number2) {
     return number1 * number2;
 }
 
-int divide(int number1, int number2) {
+double divide(double number1, double number2) {
     return number1 / number2;
 }
 
-int subtract (int number1, int number2) {
+double subtract (double number1, double number2) {
     return number1 - number2;
 }
 
-bool calculate(char operation, int number1, int number2, int *out_result, ERROR_CODES *error) {
+bool calculate(char operation, double number1, double number2, double *out_result, ERROR_CODES *error) {
     *error = OK;
     if (out_result == NULL) {
         *error = SYSTEM_ERROR;

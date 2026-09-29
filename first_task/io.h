@@ -1,8 +1,8 @@
 #ifndef IO_H
 #define IO_H
 
-int input(int *number1, int *number2, char *operation);
-int output(int number1, int number2, char operation);
+double input(double *number1, double *number2, char *operation);
+double output(double number1, double number2, char operation);
 
 
 #endif
