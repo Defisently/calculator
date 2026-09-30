@@ -15,7 +15,7 @@ calc_operations.o: src/calc_operations.c include
 tests.o: src/tests.c include main.o
 
 %.o: src/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -I./include $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f *.o main tests

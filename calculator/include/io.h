@@ -1,8 +1,9 @@
 #ifndef IO_H
 #define IO_H
+#include "../include/calc_operations.h"
 
-double input(double *number1, double *number2, char *operation);
-double output(double number1, double number2, char operation);
+ERROR_CODES input(double *number1, double *number2, char *operation);
+int output(double number1, double number2, char operation);
 
 
 #endif

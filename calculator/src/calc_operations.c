@@ -1,25 +1,12 @@
-#include "../input/calc_operations.h"
-
+#include "calc_operations.h"
+#include <math.h>
 #include <stdbool.h>
 #include <stddef.h>
 
-
 bool check_equal(double num1, double num2) {
-    const double EPSILON = 1e-6;
-    if (num1 >= num2) {
-        if ((num1 - num2) < EPSILON) {
-            return true;
-        } else {
-            return false;
-        }
-    } else {
-        if ((num2 - num1) < EPSILON) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    return fabs(num1 - num2) < 1e-9;
 }
+
 double sum(double number1, double number2) {
     return number1 + number2;
 }
@@ -28,35 +15,52 @@ double multiply(double number1, double number2) {
     return number1 * number2;
 }
 
-double divide(double number1, double number2) {
-    return number1 / number2;
+ERROR_CODES divide(double number1, double number2, double *out_result) {
+    if (out_result == NULL) {
+        return SYSTEM_ERROR;
+    }
+
+    if (check_equal(number2, 0.0)) {
+        *out_result = NAN;
+        return DIVISION_BY_ZERO;
+    }
+    *out_result = number1 / number2;
+    return SUCCESS;
 }
 
 double subtract (double number1, double number2) {
     return number1 - number2;
 }
 
-bool calculate(char operation, double number1, double number2, double *out_result, ERROR_CODES *error) {
+ERROR_CODES calculate(char operation, double number1, double number2, double *out_result) {
+
     if (out_result == NULL) {
-        *error = SYSTEM_ERROR;
-        return false;
-    }
-    if (operation == '+') {
-        *out_result = sum(number1, number2);
-        return true;
-    }
-    else if (operation == '-') {
-        *out_result = subtract(number1, number2);
-        return true;
-    }
-    else if (operation == '*') {
-        *out_result = multiply(number1, number2);
-        return true;
+        return SYSTEM_ERROR;
 
     }
-    else if (operation == '/' && check_equal(0.0, number2)) {
-        *error = DIVISION_BY_ZERO;
-        return false;
+
+    double divide_res = NAN;
+
+    if (operation == '+') {
+        *out_result = sum(number1, number2);
+        return SUCCESS;
+
+    } else if (operation == '-') {
+        *out_result = subtract(number1, number2);
+        return SUCCESS;
+
+    } else if (operation == '*') {
+        *out_result = multiply(number1, number2);
+        return SUCCESS;
+
+    } else if (operation == '/') {
+        if (divide(number1, number2, &divide_res) == DIVISION_BY_ZERO) {
+            return DIVISION_BY_ZERO;
+        } else {
+            *out_result = divide_res;
+            return SUCCESS;
+        }
+
     }
-    return false;
+    return SYSTEM_ERROR;
 }
