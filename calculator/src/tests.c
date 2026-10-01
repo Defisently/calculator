@@ -25,7 +25,8 @@ struct checking_operators {
 
 ERROR_CODES read_and_check(char *input) {
     struct testcase x = {NAN, NAN, NAN, NAN, NAN, 0};
-    struct checking_operators y = {false, false, false, false, false, false};
+    struct checking_operators y = {false, false, false,
+        false, false, false};
     char operation = '\0';
     ERROR_CODES error = SUCCESS;
 

@@ -20,8 +20,8 @@ ERROR_CODES input(double *number1, double *number2, char *operation) {
 
     #undef INPUT_NUM
 
-    printf("Input an operation: * / + -, then press enter: ");
-    if (scanf(" %c", operation) != 1 || strchr("*/+-", *operation) == NULL) {
+    printf("Input an operation: * / + - or E to exit from the programm, then press enter: ");
+    if (scanf(" %c", operation) != 1 || strchr("*/+-E", *operation) == NULL) {
         printf("You entered an invalid operation. Please try again.");
         return INVALID_OPERATION_INPUT;
     }
