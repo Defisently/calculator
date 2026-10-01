@@ -24,7 +24,7 @@ struct checking_operators {
 };
 
 ERROR_CODES read_and_check(char *input) {
-    struct testcase x = {NAN, NAN, NAN, NAN, NAN, 0};
+    struct testcase x = {NAN, NAN, NAN, NAN, 0, 0};
     struct checking_operators y = {false, false, false,
         false, false, false};
     char operation = '\0';
@@ -66,8 +66,8 @@ ERROR_CODES read_and_check(char *input) {
             if (y.point) {
                 x.point_counter++;
             }
-            if (y.has_digit == true && x.curr == 0) {
-                return false;
+            if (y.has_digit == true && x.curr == 0 && y.point == false) {
+                return INVALID_INPUT;
             }
             x.curr = x.curr * 10 + (input[i] - '0');
             y.has_digit = true;
