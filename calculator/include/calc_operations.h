@@ -1,8 +1,16 @@
 #include <stdbool.h>
+#include <stdio.h>
 
 #ifndef CALC_OPERATIONS_H
 #define CALC_OPERATIONS_H
 
+#define SOFT_ASSERT(to_check, print, go_out)      \
+  do {                                            \
+      if (to_check) {                             \
+        printf(print "\n");                       \
+        go_out;                                   \
+  }                                               \
+  } while (0)
 
 
 typedef enum {

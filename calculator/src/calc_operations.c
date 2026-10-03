@@ -1,4 +1,4 @@
-#include "calc_operations.h"
+#include "calc_operations.h" 
 #include <math.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -16,9 +16,7 @@ double multiply(double number1, double number2) {
 }
 
 ERROR_CODES divide(double number1, double number2, double *out_result) {
-    if (out_result == NULL) {
-        return SYSTEM_ERROR;
-    }
+    SOFT_ASSERT(out_result == NULL, "System error", return SYSTEM_ERROR);
 
     if (check_equal(number2, 0.0)) {
         *out_result = NAN;
@@ -34,12 +32,8 @@ double subtract (double number1, double number2) {
 
 ERROR_CODES calculate(char operation, double number1, double number2, double *out_result) {
 
-    if (out_result == NULL) {
-        return SYSTEM_ERROR;
+    SOFT_ASSERT(out_result == NULL, "System error", return SYSTEM_ERROR);
 
-    }
-
-    double divide_res = NAN;
 
     if (operation == '+') {
         *out_result = sum(number1, number2);
@@ -54,8 +48,12 @@ ERROR_CODES calculate(char operation, double number1, double number2, double *ou
         return SUCCESS;
 
     } else if (operation == '/') {
+    
+        double divide_res = NAN;
+
         if (divide(number1, number2, &divide_res) == DIVISION_BY_ZERO) {
             return DIVISION_BY_ZERO;
+
         } else {
             *out_result = divide_res;
             return SUCCESS;

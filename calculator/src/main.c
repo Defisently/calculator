@@ -4,11 +4,17 @@
 #include "calc_operations.h"
 
 
+//enum COMMANDS {
+//  exit = 'E',
+
+//}
 int main() {
     double number1 = NAN, number2 = NAN, res = NAN;
     char operation = '\0';
     bool flag = true;
     while (flag) {
+     // if (,...)
+     //     continue
         if (input(&number1, &number2, &operation) == SUCCESS) {
             if (operation == 'E') {
                 return 0;

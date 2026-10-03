@@ -23,6 +23,8 @@ struct checking_operators {
 
 };
 
+// #ifdef  / else / endif
+//
 ERROR_CODES read_and_check(char *input) {
     struct testcase x = {NAN, NAN, NAN, NAN, 0, 1};
     struct checking_operators y = {false, false, false,
@@ -98,7 +100,10 @@ ERROR_CODES read_and_check(char *input) {
 int tests(void) {
     int counter = 0;
     int counter_passed_tests = 0, counter_failed_tests = 0;
-    const int buffer_size = 60;
+    const int buffer_size = 60; // FIXME get_file_size  / seek () 
+                                // calloc 
+                                // fread 
+  //
     char buffer[buffer_size];
     FILE *fp = fopen("tests.txt", "r");
     if (!fp) {
@@ -122,7 +127,18 @@ int tests(void) {
     return counter_failed_tests;
 }
 
-int main() {
-    tests();
-    return 0;
+int main(){
+  tests();
+  return 0;
 }
+//gcc  -DTEST_BUILD
+//#ifdef TEST_BUILD
+//includet main() {
+//    tests();
+//    return 0;
+//}
+//#else
+//int main() {
+//  ...
+//}
+//#endif
