@@ -9,7 +9,7 @@ struct testcase {
     double num1, num2;
     double calc_res, true_result;
     double curr;
-    int point_counter;
+    int multiplier;
 };
 
 struct checking_operators {
@@ -24,7 +24,7 @@ struct checking_operators {
 };
 
 ERROR_CODES read_and_check(char *input) {
-    struct testcase x = {NAN, NAN, NAN, NAN, 0, 0};
+    struct testcase x = {NAN, NAN, NAN, NAN, 0, 1};
     struct checking_operators y = {false, false, false,
         false, false, false};
     char operation = '\0';
@@ -47,24 +47,19 @@ ERROR_CODES read_and_check(char *input) {
             operation = input[i];
             if (y.has_digit && y.first_number == false) {
                 if (y.is_number1_negative == false) {
-                    x.num1 = x.curr * pow(10, (-x.point_counter));
-                    y.point = false;
-                    x.point_counter = 0;
-                    x.curr = 0;
-                    y.has_digit = false;
-                    y.first_number = true;
+                    x.num1 = x.curr / x.multiplier;
                 } else {
-                    x.num1 = -1 * (x.curr * pow(10, (-x.point_counter)));
-                    y.point = false;
-                    x.point_counter = 0;
-                    x.curr = 0;
-                    y.has_digit = false;
-                    y.first_number = true;
+                    x.num1 = -1 * (x.curr / x.multiplier);
                 }
+                y.point = false;
+                x.multiplier = 1;
+                x.curr = 0;
+                y.has_digit = false;
+                y.first_number = true;
             }
         } else if (input[i] >= '0' && input[i] <= '9') {
             if (y.point) {
-                x.point_counter++;
+                x.multiplier *= 10;
             }
             if (y.has_digit == true && x.curr == 0 && y.point == false) {
                 return INVALID_INPUT;
@@ -73,9 +68,9 @@ ERROR_CODES read_and_check(char *input) {
             y.has_digit = true;
         } else if (input[i] == '=') {
             if (y.first_number == true && y.has_digit == true && y.second_number == false) {
-                x.num2 = x.curr * pow(10, (-x.point_counter));
+                x.num2 = x.curr / x.multiplier;
                 y.point = false;
-                x.point_counter = 0;
+                x.multiplier = 1;
                 x.curr = 0;
                 y.has_digit = false;
                 y.second_number = true;
@@ -83,9 +78,9 @@ ERROR_CODES read_and_check(char *input) {
         }
     }
     if (y.has_digit == true && y.first_number == true && y.second_number == true && y.is_number3_negative == false) {
-        x.true_result = x.curr * pow(10, (-x.point_counter));
+        x.true_result = x.curr / x.multiplier;
     } else if (y.has_digit == true && y.first_number == true && y.second_number == true && y.is_number3_negative == true) {
-        x.true_result = -1 * (x.curr * pow(10, (-x.point_counter)));
+        x.true_result = -1 * (x.curr / x.multiplier);
     }
 
     if (operation == '/' && x.num2 == 0) {
