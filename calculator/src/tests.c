@@ -32,13 +32,23 @@ void init_testcase(struct testcase *self){
   self->multiplier = 1;
 }
 
+void init_checking_operators(struct checking_operators *self){
+  self->has_digit = false;
+  self->first_number = false;
+  self->second_number = false;
+  self->is_number1_negative = false;
+  self->is_number3_negative = false;
+  self->first_zero = false;
+  self->point = false;
+}
+
 // #ifdef  / else / endif
 //
 ERROR_CODES read_and_check(char *input) {
     struct testcase x;
     init_testcase(&x);
-    struct checking_operators y = {false, false, false,
-        false, false, false};
+    struct checking_operators y;
+    init_checking_operators(&y);
     char operation = '\0';
     ERROR_CODES error = SUCCESS;
 
