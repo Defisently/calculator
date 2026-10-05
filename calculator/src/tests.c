@@ -23,10 +23,20 @@ struct checking_operators {
 
 };
 
+void init_testcase(struct testcase *self){
+  self->num1 = NAN;
+  self->num2 = NAN;
+  self->calc_res = NAN;
+  self->true_result = NAN;
+  self->curr = 0.0;
+  self->multiplier = 1;
+}
+
 // #ifdef  / else / endif
 //
 ERROR_CODES read_and_check(char *input) {
-    struct testcase x = {NAN, NAN, NAN, NAN, 0, 1};
+    struct testcase x;
+    init_testcase(&x);
     struct checking_operators y = {false, false, false,
         false, false, false};
     char operation = '\0';
