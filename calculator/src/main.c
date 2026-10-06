@@ -4,10 +4,10 @@
 #include "calc_operations.h"
 
 
-//enum COMMANDS {
-//  exit = 'E',
+enum COMMANDS{
+  exit = 'E',
 
-//}
+};
 int main() {
     double number1 = NAN, number2 = NAN, res = NAN;
     char operation = '\0';
@@ -17,7 +17,7 @@ int main() {
             continue;
         }
         
-        if (operation == 'E') {
+        if (operation == exit) {
             return false;
         } 
         if (calculate(operation, number1, number2, &res) == SUCCESS) {
