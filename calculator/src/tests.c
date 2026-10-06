@@ -43,8 +43,7 @@ void init_checking_operators(struct checking_operators *self){
   self->point = false;
 }
 
-// #ifdef  / else / endif
-//
+
 ERROR_CODES read_and_check(char *input) {
     struct testcase x;
     init_testcase(&x);
@@ -156,7 +155,6 @@ int tests(void) {
     
     size_t read = fread(buffer, sizeof(char), buffer_size, fp);
     fclose(fp);
-    
 
     char *line = strtok(buffer, "\n");
     while (line != NULL) {
@@ -187,14 +185,4 @@ int main(){
   tests();
   return 0;
 }
-//gcc  -DTEST_BUILD
-//#ifdef TEST_BUILD
-//includet main() {
-//    tests();
-//    return 0;
-//}
-//#else
-//int main() {
-//  ...
-//}
-//#endif
+

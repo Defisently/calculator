@@ -4,16 +4,27 @@
 #include "io.h"
 #include "math.h"
 
+
+static int clear_input(void){
+    int c = 0;
+    while ((c = getchar()) != '\n' && c != EOF){
+    }
+    return c;
+}
+
 ERROR_CODES input(double *number1, double *number2, char *operation) {
-  //fix unstop enter
     #define INPUT_NUM(num1, num2)                                            \
         do {                                                                 \
             printf("Input two numbers, then press enter: ");                 \
-            if (scanf("%lf %lf", num1, num2) != 2) {                         \
+            int read = scanf("%lf %lf", num1, num2);                         \
+            if (read != 2) {                                                 \
+                if (clear_input() == EOF || read == EOF){                    \
+                    return INVALID_NUMBER_INPUT;                             \
+                }                                                            \
                 printf("You entered an invalid input. Please try again.\n"); \
                 return INVALID_NUMBER_INPUT;                                 \
             }                                                                \
-        } while (0)
+        } while (0);
 
     INPUT_NUM(number1, number2);
 

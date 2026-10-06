@@ -14,19 +14,18 @@ int main() {
     bool flag = true;
     while (flag) {
         if (input(&number1, &number2, &operation) != SUCCESS){
-            flag = false;
             continue;
         }
         
         if (operation == 'E') {
             return false;
-      
+        } 
         if (calculate(operation, number1, number2, &res) == SUCCESS) {
             printf("Result: %.3f\n", res);
         } else {
             printf("Error: %d\n", output(number1, number2, operation));
         }
-      }
     }
 }
+
 
