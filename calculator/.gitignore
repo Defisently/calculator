@@ -1,0 +1,13 @@
+
+.idea/
+
+cmake-build-*/
+build/
+*.dSYM/
+*.o
+*.out
+*.xml
+*.iml
+main
+
+.DS_STORE

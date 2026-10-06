@@ -8,6 +8,8 @@ enum COMMANDS{
   exit = 'E',
 
 };
+
+
 int main() {
     double number1 = NAN, number2 = NAN, res = NAN;
     char operation = '\0';

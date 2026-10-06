@@ -141,6 +141,7 @@ int tests(void) {
     }
 
     long buffer_size = get_file_size(fp);
+
     if (buffer_size < 0){
         fclose(fp);
         return FILE_SIZE_ERROR; 
