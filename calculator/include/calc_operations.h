@@ -22,6 +22,8 @@ typedef enum {
     NOT_EQUAL               = 5,
     INVALID_INPUT           = 6,
     FILE_NOT_OPENED         = 7,
+    FILE_SIZE_ERROR         = 8,
+    NOT_ENOUGH_MEMORY       = 9, 
 } ERROR_CODES;
 
 bool check_equal(double num1, double num2);

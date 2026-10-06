@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "calc_operations.h"
 #include <math.h>
+#include <stdlib.h>
 
 struct testcase {
     double num1, num2;
@@ -47,8 +48,10 @@ void init_checking_operators(struct checking_operators *self){
 ERROR_CODES read_and_check(char *input) {
     struct testcase x;
     init_testcase(&x);
+    
     struct checking_operators y;
     init_checking_operators(&y);
+    
     char operation = '\0';
     ERROR_CODES error = SUCCESS;
 
@@ -56,7 +59,7 @@ ERROR_CODES read_and_check(char *input) {
         return INVALID_INPUT;
     }
 
-    for (int i = 0; i < 60 && input[i] != '\0'; i++) {
+    for (int i = 0; input[i] != '\0'; i++) {
         if (input[i] == ' ') {
             continue;
         } else if (input[i] == '.') {
@@ -117,30 +120,63 @@ ERROR_CODES read_and_check(char *input) {
     }
 }
 
+long get_file_size(FILE *fp){
+    if (fseek(fp, 0, SEEK_END) != 0){
+      return -1;
+    }
+    
+    long size = ftell(fp);
+    rewind(fp);
+    
+    return size;
+}
+
 int tests(void) {
     int counter = 0;
     int counter_passed_tests = 0, counter_failed_tests = 0;
-    const int buffer_size = 60; // FIXME get_file_size  / seek () 
-                                // calloc 
-                                // fread 
-  //
-    char buffer[buffer_size];
+
     FILE *fp = fopen("tests.txt", "r");
+
     if (!fp) {
         return FILE_NOT_OPENED;
     }
 
-    while (fgets(buffer, buffer_size, fp) != NULL) {
+    long buffer_size = get_file_size(fp);
+    if (buffer_size < 0){
+        fclose(fp);
+        return FILE_SIZE_ERROR; 
+    }
+    
+    char *buffer = calloc(buffer_size + 1, sizeof(char));
+    
+    if (buffer == NULL){
+        fclose(fp);
+        return NOT_ENOUGH_MEMORY;
+    }
+    
+    size_t read = fread(buffer, sizeof(char), buffer_size, fp);
+    fclose(fp);
+    
+
+    char *line = strtok(buffer, "\n");
+    while (line != NULL) {
+
         counter++;
-        if (read_and_check(buffer) == SUCCESS) {
+        ERROR_CODES result = read_and_check(line);
+
+        if (result == SUCCESS) {
             counter_passed_tests++;
             printf("%d %s", counter, "Test passed!\n");
         } else {
             counter_failed_tests++;
             printf("%d Test failed! Error code: %d\n", counter, read_and_check(buffer));
             }
+        
+        line = strtok(NULL, "\n");
     }
-    fclose(fp);
+  
+    free(buffer);
+
     printf("~~~~~~~~~~~~~~~~~~~~~~~~\n");
     printf("%d tests passed\n", counter_passed_tests);
     printf("%d tests failed\n", counter_failed_tests);
