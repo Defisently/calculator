@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-#include <stdlib.h>
 #include "calc_operations.h"
 #include <math.h>
 #include <stdlib.h>
